@@ -1,0 +1,15 @@
+[package]
+name = "lalela-llm"
+version = "0.1.0"
+description = "Lalela local-LLM sidecar: loads a GGUF model via llama.cpp and serves generate requests over stdio"
+edition = "2021"
+
+[dependencies]
+llama-cpp-2 = { version = "0.1.150", features = ["sampler"] }
+encoding_rs = "0.8"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+
+# Metal GPU offload on Apple Silicon (same toolchain whisper-rs already needs).
+[target.'cfg(target_os = "macos")'.dependencies]
+llama-cpp-2 = { version = "0.1.150", features = ["sampler", "metal"] }

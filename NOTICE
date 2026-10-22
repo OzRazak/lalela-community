@@ -1,0 +1,76 @@
+Lalela Community
+Copyright 2026 Auxo Digital Pty Ltd
+
+This product is licensed under the Apache License, Version 2.0 (see LICENSE).
+
+The Apache License does not grant permission to use the trade names,
+trademarks, service marks or product names of Auxo Digital Pty Ltd, including
+"Lalela", the Lalela logo and app icons, "Auxo", "Auxo Digital" and "Amp",
+except as required for reasonable and customary use in describing the origin
+of the work. See TRADEMARKS.md.
+
+-------------------------------------------------------------------------------
+Components included in this repository
+-------------------------------------------------------------------------------
+
+Amp design system (apps/desktop/amp)
+  Copyright 2026 Auxo Digital Pty Ltd. Distributed in this repository under
+  the Apache License, Version 2.0. The Amp name and the Spark mascot design
+  are trademarks of Auxo Digital Pty Ltd (see TRADEMARKS.md).
+
+tao (apps/desktop/src-tauri/vendor/tao)
+  Copyright the tao contributors (Tauri Programme within The Commons
+  Conservancy). Licensed under the Apache License, Version 2.0; see
+  vendor/tao/LICENSE. Vendored with one Lalela patch described in
+  vendor/README.md.
+
+swift-rs (apps/desktop/src-tauri/vendor/swift-rs)
+  Copyright Brendan Molloy and Lucas Fernandes Nogueira. Licensed under the
+  MIT License or the Apache License, Version 2.0, at your option; see
+  vendor/swift-rs/LICENSE-MIT and LICENSE-APACHE. Vendored with one Lalela
+  patch described in its README.
+
+-------------------------------------------------------------------------------
+Major third-party components linked at build time
+-------------------------------------------------------------------------------
+
+These are fetched by Cargo or pnpm, not stored in this repository. The full,
+generated inventory with each package's declared licence is in
+THIRD-PARTY-LICENSES.md.
+
+whisper.cpp / ggml (via the whisper-rs crate)
+  Copyright The ggml authors. MIT License.
+
+llama.cpp / ggml (via the llama-cpp-2 crate, in the lalela-llm sidecar)
+  Copyright The ggml authors. MIT License.
+
+sherpa-onnx (via the sherpa-rs crate)
+  Copyright Xiaomi Corporation and the k2-fsa contributors.
+  Apache License, Version 2.0.
+
+ONNX Runtime (prebuilt libraries downloaded by sherpa-rs)
+  Copyright Microsoft Corporation. MIT License.
+
+Tauri and its plugins
+  Copyright the Tauri Programme within The Commons Conservancy.
+  Apache License, Version 2.0 or MIT License.
+
+React, Vite, Tailwind CSS, lucide-react and other npm packages
+  Each under its own licence (mostly MIT); see THIRD-PARTY-LICENSES.md.
+
+Montserrat and Courier Prime fonts (via @fontsource)
+  SIL Open Font License, Version 1.1.
+
+-------------------------------------------------------------------------------
+Models downloaded at runtime
+-------------------------------------------------------------------------------
+
+Lalela downloads speech and language models the first time you use a feature
+that needs them. They are not part of this repository and each is governed by
+its own licence, shown by its publisher:
+
+  - Whisper ggml models (Hugging Face: ggerganov/whisper.cpp), MIT License
+  - pyannote segmentation 3.0 (ONNX export by the sherpa-onnx project), MIT License
+  - NVIDIA NeMo TitaNet speaker embedding (ONNX export by the sherpa-onnx project)
+  - On-device language models offered in Settings → AI models, each under the
+    licence published with that model

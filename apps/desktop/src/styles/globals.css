@@ -1,0 +1,121 @@
+@import "tailwindcss";
+
+/* Amp kit CSS (source-copied into ../../amp). Motion tokens + the Spark mascot +
+   the First-Mile primitives. Amp's theme.css is intentionally NOT imported — the
+   canonical color/type tokens below are already the Lalela-canonical set Amp
+   derives from, so re-importing @theme would only duplicate them. */
+@import "../../amp/motion.css";
+@import "../../amp/marks/spark.css";
+@import "../../amp/primitives/primitives.css";
+
+/*
+  Lalela — Auxo Digital theme tokens.
+  Mirrors the Auxo Focus design system: signature yellow #FFD200, blue accent,
+  clean white background, Montserrat typography, 0.5rem radius.
+*/
+@theme {
+  --color-background: #ffffff;
+  --color-foreground: #343330;
+
+  --color-card: #ffffff;
+  --color-card-foreground: #343330;
+
+  --color-muted: hsl(210 40% 96.1%);
+  --color-muted-foreground: hsl(215 16% 47%);
+
+  --color-surface: hsl(210 40% 98%);
+  --color-border: hsl(214 32% 91%);
+  --color-input: hsl(214 32% 91%);
+  --color-ring: hsl(220 80% 55%);
+
+  /* Brand */
+  --color-primary: #ffd200;
+  --color-primary-foreground: #343330;
+  --color-accent: hsl(220 80% 55%);
+  --color-accent-foreground: #ffffff;
+
+  /* Speaker palette */
+  --color-speaker-me: hsl(220 80% 55%);
+  --color-speaker-1: hsl(45 100% 45%);
+  --color-speaker-2: hsl(150 70% 45%);
+  --color-speaker-3: hsl(35 90% 55%);
+  --color-speaker-4: hsl(270 75% 50%);
+  --color-speaker-5: hsl(340 85% 60%);
+
+  /* Status */
+  --color-success: hsl(150 70% 40%);
+  --color-warning: hsl(35 90% 50%);
+  --color-danger: hsl(0 75% 55%);
+
+  --font-sans: "Montserrat", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "Courier Prime", ui-monospace, monospace;
+
+  --radius: 0.5rem;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Rendered Markdown (summaries) */
+.md {
+  font-size: 15px;
+  line-height: 1.6;
+}
+.md h1,
+.md h2,
+.md h3 {
+  font-weight: 700;
+  margin: 1.1em 0 0.4em;
+  line-height: 1.3;
+}
+.md h1 { font-size: 1.3em; }
+.md h2 { font-size: 1.12em; }
+.md h3 { font-size: 1em; }
+.md h2:first-child,
+.md h1:first-child {
+  margin-top: 0;
+}
+.md p { margin: 0.5em 0; }
+.md ul,
+.md ol {
+  margin: 0.4em 0;
+  padding-left: 1.3em;
+}
+.md ul { list-style: disc; }
+.md ol { list-style: decimal; }
+.md li { margin: 0.2em 0; }
+.md strong { font-weight: 600; }
+.md a { color: var(--color-accent); text-decoration: underline; }
+.md code {
+  font-family: var(--font-mono);
+  background: var(--color-muted);
+  padding: 0.1em 0.3em;
+  border-radius: 4px;
+  font-size: 0.9em;
+}
+
+/* Thin, unobtrusive scrollbars */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-border) transparent;
+}
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+*::-webkit-scrollbar-thumb {
+  background-color: var(--color-border);
+  border-radius: 9999px;
+}

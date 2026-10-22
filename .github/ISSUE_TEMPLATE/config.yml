@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Report a security vulnerability
+    url: https://github.com/OzRazak/lalela-community/security/advisories/new
+    about: Please report security problems privately (see SECURITY.md).
+  - name: The official Lalela app
+    url: https://lalela.auxodigital.africa
+    about: Accounts, sync, sharing and App Store questions belong to the official app, not this repository.

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>NSMicrophoneUsageDescription</key>
+  <string>Lalela uses your microphone to record your meetings and voice notes so it can transcribe them. Transcription runs on this device unless you switch on cloud transcription in Settings.</string>
+  <!-- iOS Apple-Speech engine (SpeechTranscriber, opt-in, iOS 26+). Fully
+       on-device, but declared so App Store review's static analyzer is
+       satisfied whenever the app links the Speech recognition APIs. -->
+  <key>NSSpeechRecognitionUsageDescription</key>
+  <string>Lalela can use Apple's on-device speech recognition to transcribe your meetings. Everything stays on your device.</string>
+  <key>NSAudioCaptureUsageDescription</key>
+  <string>Lalela captures your Mac's system audio so it can transcribe the other participants in a call, without a bot joining the meeting.</string>
+  <!-- iOS: keep mic capture alive when the phone auto-locks or the app is
+       backgrounded mid-meeting. Ignored on macOS. -->
+  <key>UIBackgroundModes</key>
+  <array>
+    <string>audio</string>
+  </array>
+  <!-- Export compliance: the app uses only standard HTTPS/TLS (reqwest
+       rustls-tls) — no proprietary/non-exempt encryption. Declaring this
+       auto-answers the App Store export-compliance question so submission
+       does not stall on it. -->
+  <key>ITSAppUsesNonExemptEncryption</key>
+  <false/>
+</dict>
+</plist>

@@ -1,0 +1,12 @@
+Oz Razak  0:04
+Morning everyone. Quick standup — Thandi, want to kick us off?
+
+Thandi Mokoena  0:19
+Sure. Yesterday I finished the Auxo importer and started on the wiki compile.
+Today I'm testing the PDF path.
+
+Sipho Dlamini  0:52
+Design review for the People directory is booked for Thursday.
+
+Oz Razak  1:10
+Great. Blockers? None? Let's ship it.

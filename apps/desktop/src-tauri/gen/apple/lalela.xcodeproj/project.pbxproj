@@ -1,0 +1,778 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		EBEED4011EB7F7A089F38C8C /* AuxoIdAuthSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09288489FBFB13DBE292692B /* AuxoIdAuthSession.swift */; };
+		7CF274109236025840DCD086 /* AuthenticationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EBFF7A7B880258EB247F419 /* AuthenticationServices.framework */; };
+		06BB24C04EAEED475F81EB03 /* WatchConnectivityReceiver.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE66B5734AE4408D0A3ABAC5 /* WatchConnectivityReceiver.swift */; };
+		101BB15EBB290A98B2CECFAB /* LalelaWatchApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C33C110F895EB896CF48EAB /* LalelaWatchApp.swift */; };
+		106590352A386F9AE32FB02F /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 78AFC69CA2710A3D9F99BD84 /* CoreAudio.framework */; };
+		138ADAE6F34222CF0F58B51D /* libapp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B4E5F59D5AE06EE784747D16 /* libapp.a */; };
+		1C15A72EFFB838624B270C56 /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = FDBF15D714C7431571BE79E7 /* main.mm */; };
+		20EC73AC315A3FA307B26D32 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095EA2AC3DA58D1A4A4F16C9 /* ContentView.swift */; };
+		21EFA84418CA2AA4C5099612 /* AVFAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 521CB3331DBB22FD1EF7FFAC /* AVFAudio.framework */; };
+		243CA019F7BDB5C2A3C39108 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A11664FC54821CC5012C609 /* Accelerate.framework */; };
+		2E8AC343EFEEA4CA4E3869A4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3F45299218F7249E1EFAB303 /* Assets.xcassets */; };
+		325F3B35E66A03E71985A169 /* FoundationModels.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9C56B25E420EC16E120D91B /* FoundationModels.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		37CEF3908CFD9EA6F1CED82D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39D4F692173002D2A9FC27C6 /* UIKit.framework */; };
+		4319CE578A2CA3FF42ABBF42 /* assets in Resources */ = {isa = PBXBuildFile; fileRef = 4007AA2EC8DECE0C8773BBA4 /* assets */; };
+		4F2628A5960FD7CEF0B6EC58 /* WatchRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B6B23B9727C173DDFBF3BD8 /* WatchRecorder.swift */; };
+		51643DA2047488C4DCCADEE0 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58C7BB74DE0D537271CC9D86 /* CoreGraphics.framework */; };
+		53950B9CB848AF0E68269B5A /* Speech.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A1C75BED46032397F8A3500 /* Speech.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		5BE0DA4BAC3C99721DE6B48F /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 806348AA9047F7E2E745C125 /* WebKit.framework */; };
+		5FC066B061E37B2996EABE07 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4BFFB6819FDEF57762CDD55C /* LaunchScreen.storyboard */; };
+		B1A5E0C1D2E3F40506070801 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = B1A5E0C1D2E3F40506070802 /* PrivacyInfo.xcprivacy */; };
+		600C59E571853A7908791ED6 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79147510E69B14F104EDB5D0 /* AudioToolbox.framework */; };
+		61483D2C269CA984EAB2DF18 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F41D6D196434984FF19D4DA /* QuartzCore.framework */; };
+		636C7C4C5169420A4DC9DA2A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13667CD300A2AB7598604DA7 /* Assets.xcassets */; };
+		68794828FF952EB4C075F7DD /* Metal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4BFB82EB31D6B442D97F741 /* Metal.framework */; };
+		8C2C55F1870A977DBA52EDA8 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE34CF6BAF35019819A1FB0D /* CoreMedia.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		A7D3EA7FC3EB94802F758C1C /* WatchConnectivity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0EF8CC14827D7AE496C94C35 /* WatchConnectivity.framework */; };
+		AC633764FE4D608CB20EFE53 /* AppleAIBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = E493240F4E034563C90DFFF6 /* AppleAIBridge.swift */; };
+		B0DDEF60B59DB32B132E28C6 /* MetalKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E589304BA2190BA1F74CAC8C /* MetalKit.framework */; };
+		CF7EEE9E9A6026E67C5ECFEC /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D82B5A4EC30E4DECBEF9C709 /* Security.framework */; };
+		D9FE5FA0C4EB53469497975F /* WatchConnectivity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0EF8CC14827D7AE496C94C35 /* WatchConnectivity.framework */; };
+		E4C778B864C782C2AE67FD05 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9874ED3616B917BCE0394D06 /* AVFoundation.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		09288489FBFB13DBE292692B /* AuxoIdAuthSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuxoIdAuthSession.swift; sourceTree = "<group>"; };
+		5EBFF7A7B880258EB247F419 /* AuthenticationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AuthenticationServices.framework; path = System/Library/Frameworks/AuthenticationServices.framework; sourceTree = SDKROOT; };
+		07666CCE9AE9B135FD652EC1 /* cloud.rs */ = {isa = PBXFileReference; path = cloud.rs; sourceTree = "<group>"; };
+		095EA2AC3DA58D1A4A4F16C9 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		09D11F5F4B50EFF12587C54D /* frames.rs */ = {isa = PBXFileReference; path = frames.rs; sourceTree = "<group>"; };
+		0EF8CC14827D7AE496C94C35 /* WatchConnectivity.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WatchConnectivity.framework; path = System/Library/Frameworks/WatchConnectivity.framework; sourceTree = SDKROOT; };
+		121989C39CA4BEE14C6B31C2 /* lalela-mcp.rs */ = {isa = PBXFileReference; path = "lalela-mcp.rs"; sourceTree = "<group>"; };
+		130F630D3E1470D92AAE3FA3 /* libapp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libapp.a; sourceTree = "<group>"; };
+		13667CD300A2AB7598604DA7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		1C33C110F895EB896CF48EAB /* LalelaWatchApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LalelaWatchApp.swift; sourceTree = "<group>"; };
+		1E7150EAFAE0F067AE98ECDC /* apple_engine.rs */ = {isa = PBXFileReference; path = apple_engine.rs; sourceTree = "<group>"; };
+		2492CF5B0CECB4848D82A2FE /* audio.rs */ = {isa = PBXFileReference; path = audio.rs; sourceTree = "<group>"; };
+		267A1A71A907E2AF296A2660 /* image_proc.rs */ = {isa = PBXFileReference; path = image_proc.rs; sourceTree = "<group>"; };
+		29118F661ABD0C682B3976FF /* local_llm.rs */ = {isa = PBXFileReference; path = local_llm.rs; sourceTree = "<group>"; };
+		2A1C75BED46032397F8A3500 /* Speech.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Speech.framework; path = System/Library/Frameworks/Speech.framework; sourceTree = SDKROOT; };
+		326616E74AD46E31D5091610 /* system_tap.rs */ = {isa = PBXFileReference; path = system_tap.rs; sourceTree = "<group>"; };
+		39D4F692173002D2A9FC27C6 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		3EF3423ADE7D65B6DE28BA8A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		3F45299218F7249E1EFAB303 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		4007AA2EC8DECE0C8773BBA4 /* assets */ = {isa = PBXFileReference; lastKnownFileType = folder; path = assets; sourceTree = SOURCE_ROOT; };
+		413E0C88C56CA8798D354274 /* detect.rs */ = {isa = PBXFileReference; path = detect.rs; sourceTree = "<group>"; };
+		4BFFB6819FDEF57762CDD55C /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		521CB3331DBB22FD1EF7FFAC /* AVFAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFAudio.framework; path = System/Library/Frameworks/AVFAudio.framework; sourceTree = SDKROOT; };
+		531D2DE70A2A48D0EB6A5CBF /* audio.rs */ = {isa = PBXFileReference; path = audio.rs; sourceTree = "<group>"; };
+		58C7BB74DE0D537271CC9D86 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		591754D3E81E5A13C163B5CB /* commands.rs */ = {isa = PBXFileReference; path = commands.rs; sourceTree = "<group>"; };
+		593EEDA3B34BC1AD184EC889 /* biasing.rs */ = {isa = PBXFileReference; path = biasing.rs; sourceTree = "<group>"; };
+		5A35ECE711A7656AEC115895 /* sidecar_engine.rs */ = {isa = PBXFileReference; path = sidecar_engine.rs; sourceTree = "<group>"; };
+		5FB2CB6892892DDFA2C38093 /* downloads.rs */ = {isa = PBXFileReference; path = downloads.rs; sourceTree = "<group>"; };
+		6A11664FC54821CC5012C609 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
+		6AAECC587AC53ADED2B2FFDB /* store.rs */ = {isa = PBXFileReference; path = store.rs; sourceTree = "<group>"; };
+		6F41D6D196434984FF19D4DA /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		70B20EB2672F52F637B0F34D /* LalelaWatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LalelaWatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		711B0E393104B0F63ECD7F11 /* models.rs */ = {isa = PBXFileReference; path = models.rs; sourceTree = "<group>"; };
+		761D4B80C7CCB968E35D1456 /* lib.rs */ = {isa = PBXFileReference; path = lib.rs; sourceTree = "<group>"; };
+		76337497C1DADD4C6EF64919 /* bindings.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = bindings.h; sourceTree = "<group>"; };
+		788A98DB779ED313B63941A8 /* transcribe.rs */ = {isa = PBXFileReference; path = transcribe.rs; sourceTree = "<group>"; };
+		78AFC69CA2710A3D9F99BD84 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
+		79147510E69B14F104EDB5D0 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		7934FADE9D1A937EAE1EBB47 /* sidecar.rs */ = {isa = PBXFileReference; path = sidecar.rs; sourceTree = "<group>"; };
+		806348AA9047F7E2E745C125 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
+		8497BAE62840C0BD7158118F /* mod.rs */ = {isa = PBXFileReference; path = mod.rs; sourceTree = "<group>"; };
+		8BB32E7E9AB3D82A8410D111 /* mod.rs */ = {isa = PBXFileReference; path = mod.rs; sourceTree = "<group>"; };
+		8FFBE4649963A365D42A6AC9 /* ios_audio.rs */ = {isa = PBXFileReference; path = ios_audio.rs; sourceTree = "<group>"; };
+		939611B404466639E869FA75 /* lalela_iOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = lalela_iOS.entitlements; sourceTree = "<group>"; };
+		B1A5E0C1D2E3F40506070802 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		9874ED3616B917BCE0394D06 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		9B6B23B9727C173DDFBF3BD8 /* WatchRecorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchRecorder.swift; sourceTree = "<group>"; };
+		9E46A105083E9DDE66B728C4 /* libapp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libapp.a; sourceTree = "<group>"; };
+		ABD5C92B87BB8D0AE687EA87 /* gateway.rs */ = {isa = PBXFileReference; path = gateway.rs; sourceTree = "<group>"; };
+		ACAF9DC6BFFAB586C523CA01 /* lalela_iOS.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = lalela_iOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B4E5F59D5AE06EE784747D16 /* libapp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libapp.a; sourceTree = "<group>"; };
+		B7C58CCC3C654DACDF41799E /* msoauth.rs */ = {isa = PBXFileReference; path = msoauth.rs; sourceTree = "<group>"; };
+		B8FBC9B2961ECD95D37C9694 /* whisper.rs */ = {isa = PBXFileReference; path = whisper.rs; sourceTree = "<group>"; };
+		C17B49A1B791BC7415CA6EE3 /* main.rs */ = {isa = PBXFileReference; path = main.rs; sourceTree = "<group>"; };
+		C20D3069F2BC30124E29BFB7 /* migrate.rs */ = {isa = PBXFileReference; path = migrate.rs; sourceTree = "<group>"; };
+		C4BFB82EB31D6B442D97F741 /* Metal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Metal.framework; path = System/Library/Frameworks/Metal.framework; sourceTree = SDKROOT; };
+		C9C56B25E420EC16E120D91B /* FoundationModels.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FoundationModels.framework; path = System/Library/Frameworks/FoundationModels.framework; sourceTree = SDKROOT; };
+		D82B5A4EC30E4DECBEF9C709 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		D9BF3151EB00AEF64CABCA96 /* paths.rs */ = {isa = PBXFileReference; path = paths.rs; sourceTree = "<group>"; };
+		DB2E1A530F429EE9815327B1 /* apple_bridge.rs */ = {isa = PBXFileReference; path = apple_bridge.rs; sourceTree = "<group>"; };
+		DC525478E07CA9A8091BDAD8 /* speakers.rs */ = {isa = PBXFileReference; path = speakers.rs; sourceTree = "<group>"; };
+		DE34CF6BAF35019819A1FB0D /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		DEFD4C7627AF195157F4A2A6 /* window.rs */ = {isa = PBXFileReference; path = window.rs; sourceTree = "<group>"; };
+		E493240F4E034563C90DFFF6 /* AppleAIBridge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleAIBridge.swift; sourceTree = "<group>"; };
+		E589304BA2190BA1F74CAC8C /* MetalKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MetalKit.framework; path = System/Library/Frameworks/MetalKit.framework; sourceTree = SDKROOT; };
+		E76D5D36F2562C5B59946C18 /* capture.rs */ = {isa = PBXFileReference; path = capture.rs; sourceTree = "<group>"; };
+		ED869447CAE7DA1A4DD82CCB /* secrets.rs */ = {isa = PBXFileReference; path = secrets.rs; sourceTree = "<group>"; };
+		EDB6360FFFA2D1CA2668117D /* apple_llm.rs */ = {isa = PBXFileReference; path = apple_llm.rs; sourceTree = "<group>"; };
+		EE66B5734AE4408D0A3ABAC5 /* WatchConnectivityReceiver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchConnectivityReceiver.swift; sourceTree = "<group>"; };
+		F02C40F181183BEF1F84886E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		F713BE8928F6BD7575B52373 /* recording.rs */ = {isa = PBXFileReference; path = recording.rs; sourceTree = "<group>"; };
+		FBF6957B5630D9BC3DD2B5FD /* diarize.rs */ = {isa = PBXFileReference; path = diarize.rs; sourceTree = "<group>"; };
+		FDBF15D714C7431571BE79E7 /* main.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = main.mm; sourceTree = "<group>"; };
+		FF9A0CD6084207FA3A0B080C /* watch_inbox.rs */ = {isa = PBXFileReference; path = watch_inbox.rs; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		7E68E7ABAE492DAF4AE2ACFD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				138ADAE6F34222CF0F58B51D /* libapp.a in Frameworks */,
+				243CA019F7BDB5C2A3C39108 /* Accelerate.framework in Frameworks */,
+				21EFA84418CA2AA4C5099612 /* AVFAudio.framework in Frameworks */,
+				600C59E571853A7908791ED6 /* AudioToolbox.framework in Frameworks */,
+				106590352A386F9AE32FB02F /* CoreAudio.framework in Frameworks */,
+				51643DA2047488C4DCCADEE0 /* CoreGraphics.framework in Frameworks */,
+				68794828FF952EB4C075F7DD /* Metal.framework in Frameworks */,
+				B0DDEF60B59DB32B132E28C6 /* MetalKit.framework in Frameworks */,
+				61483D2C269CA984EAB2DF18 /* QuartzCore.framework in Frameworks */,
+				CF7EEE9E9A6026E67C5ECFEC /* Security.framework in Frameworks */,
+				37CEF3908CFD9EA6F1CED82D /* UIKit.framework in Frameworks */,
+				5BE0DA4BAC3C99721DE6B48F /* WebKit.framework in Frameworks */,
+				325F3B35E66A03E71985A169 /* FoundationModels.framework in Frameworks */,
+				53950B9CB848AF0E68269B5A /* Speech.framework in Frameworks */,
+				E4C778B864C782C2AE67FD05 /* AVFoundation.framework in Frameworks */,
+				8C2C55F1870A977DBA52EDA8 /* CoreMedia.framework in Frameworks */,
+				A7D3EA7FC3EB94802F758C1C /* WatchConnectivity.framework in Frameworks */,
+				7CF274109236025840DCD086 /* AuthenticationServices.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9B59B573E34AF9A213A09017 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D9FE5FA0C4EB53469497975F /* WatchConnectivity.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		14DC23510166E72BBA8B5AEF /* arm64 */ = {
+			isa = PBXGroup;
+			children = (
+				9F5D07320516FA9DA4704B0D /* debug */,
+				A04E681FC44556D4D5308430 /* release */,
+			);
+			path = arm64;
+			sourceTree = "<group>";
+		};
+		1868C5C2216919EAC9D8EE6C /* import */ = {
+			isa = PBXGroup;
+			children = (
+				2492CF5B0CECB4848D82A2FE /* audio.rs */,
+				09D11F5F4B50EFF12587C54D /* frames.rs */,
+				8497BAE62840C0BD7158118F /* mod.rs */,
+			);
+			path = import;
+			sourceTree = "<group>";
+		};
+		25D90069D1E3455344FF62C1 /* asr */ = {
+			isa = PBXGroup;
+			children = (
+				1E7150EAFAE0F067AE98ECDC /* apple_engine.rs */,
+				593EEDA3B34BC1AD184EC889 /* biasing.rs */,
+				8BB32E7E9AB3D82A8410D111 /* mod.rs */,
+				5A35ECE711A7656AEC115895 /* sidecar_engine.rs */,
+				B8FBC9B2961ECD95D37C9694 /* whisper.rs */,
+			);
+			path = asr;
+			sourceTree = "<group>";
+		};
+		2E5396DFB565234D2B7F2894 /* lalela_iOS */ = {
+			isa = PBXGroup;
+			children = (
+				3EF3423ADE7D65B6DE28BA8A /* Info.plist */,
+				939611B404466639E869FA75 /* lalela_iOS.entitlements */,
+				B1A5E0C1D2E3F40506070802 /* PrivacyInfo.xcprivacy */,
+			);
+			path = lalela_iOS;
+			sourceTree = "<group>";
+		};
+		302B89B90B96E3B6ACC48169 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				DB2E1A530F429EE9815327B1 /* apple_bridge.rs */,
+				EDB6360FFFA2D1CA2668117D /* apple_llm.rs */,
+				531D2DE70A2A48D0EB6A5CBF /* audio.rs */,
+				E76D5D36F2562C5B59946C18 /* capture.rs */,
+				07666CCE9AE9B135FD652EC1 /* cloud.rs */,
+				591754D3E81E5A13C163B5CB /* commands.rs */,
+				413E0C88C56CA8798D354274 /* detect.rs */,
+				FBF6957B5630D9BC3DD2B5FD /* diarize.rs */,
+				5FB2CB6892892DDFA2C38093 /* downloads.rs */,
+				ABD5C92B87BB8D0AE687EA87 /* gateway.rs */,
+				267A1A71A907E2AF296A2660 /* image_proc.rs */,
+				8FFBE4649963A365D42A6AC9 /* ios_audio.rs */,
+				761D4B80C7CCB968E35D1456 /* lib.rs */,
+				29118F661ABD0C682B3976FF /* local_llm.rs */,
+				C17B49A1B791BC7415CA6EE3 /* main.rs */,
+				C20D3069F2BC30124E29BFB7 /* migrate.rs */,
+				711B0E393104B0F63ECD7F11 /* models.rs */,
+				B7C58CCC3C654DACDF41799E /* msoauth.rs */,
+				D9BF3151EB00AEF64CABCA96 /* paths.rs */,
+				F713BE8928F6BD7575B52373 /* recording.rs */,
+				ED869447CAE7DA1A4DD82CCB /* secrets.rs */,
+				7934FADE9D1A937EAE1EBB47 /* sidecar.rs */,
+				DC525478E07CA9A8091BDAD8 /* speakers.rs */,
+				6AAECC587AC53ADED2B2FFDB /* store.rs */,
+				326616E74AD46E31D5091610 /* system_tap.rs */,
+				788A98DB779ED313B63941A8 /* transcribe.rs */,
+				FF9A0CD6084207FA3A0B080C /* watch_inbox.rs */,
+				DEFD4C7627AF195157F4A2A6 /* window.rs */,
+				25D90069D1E3455344FF62C1 /* asr */,
+				80F35CC29E166E4E0ADF4E4D /* bin */,
+				1868C5C2216919EAC9D8EE6C /* import */,
+			);
+			name = src;
+			path = ../../src;
+			sourceTree = "<group>";
+		};
+		52D601752C8FCB423C3E0490 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				ACAF9DC6BFFAB586C523CA01 /* lalela_iOS.app */,
+				70B20EB2672F52F637B0F34D /* LalelaWatch.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		7B0F49877551FB023A723051 /* bindings */ = {
+			isa = PBXGroup;
+			children = (
+				76337497C1DADD4C6EF64919 /* bindings.h */,
+			);
+			path = bindings;
+			sourceTree = "<group>";
+		};
+		80F35CC29E166E4E0ADF4E4D /* bin */ = {
+			isa = PBXGroup;
+			children = (
+				121989C39CA4BEE14C6B31C2 /* lalela-mcp.rs */,
+			);
+			path = bin;
+			sourceTree = "<group>";
+		};
+		9F5D07320516FA9DA4704B0D /* debug */ = {
+			isa = PBXGroup;
+			children = (
+				9E46A105083E9DDE66B728C4 /* libapp.a */,
+			);
+			path = debug;
+			sourceTree = "<group>";
+		};
+		A04E681FC44556D4D5308430 /* release */ = {
+			isa = PBXGroup;
+			children = (
+				130F630D3E1470D92AAE3FA3 /* libapp.a */,
+			);
+			path = release;
+			sourceTree = "<group>";
+		};
+		A42272BC25FE45063A4F0191 /* LalelaWatch */ = {
+			isa = PBXGroup;
+			children = (
+				3F45299218F7249E1EFAB303 /* Assets.xcassets */,
+				095EA2AC3DA58D1A4A4F16C9 /* ContentView.swift */,
+				F02C40F181183BEF1F84886E /* Info.plist */,
+				1C33C110F895EB896CF48EAB /* LalelaWatchApp.swift */,
+				9B6B23B9727C173DDFBF3BD8 /* WatchRecorder.swift */,
+			);
+			path = LalelaWatch;
+			sourceTree = "<group>";
+		};
+		ABC381AAEA6FCF28E882E38C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				5EBFF7A7B880258EB247F419 /* AuthenticationServices.framework */,
+				6A11664FC54821CC5012C609 /* Accelerate.framework */,
+				79147510E69B14F104EDB5D0 /* AudioToolbox.framework */,
+				521CB3331DBB22FD1EF7FFAC /* AVFAudio.framework */,
+				9874ED3616B917BCE0394D06 /* AVFoundation.framework */,
+				78AFC69CA2710A3D9F99BD84 /* CoreAudio.framework */,
+				58C7BB74DE0D537271CC9D86 /* CoreGraphics.framework */,
+				DE34CF6BAF35019819A1FB0D /* CoreMedia.framework */,
+				C9C56B25E420EC16E120D91B /* FoundationModels.framework */,
+				B4E5F59D5AE06EE784747D16 /* libapp.a */,
+				C4BFB82EB31D6B442D97F741 /* Metal.framework */,
+				E589304BA2190BA1F74CAC8C /* MetalKit.framework */,
+				6F41D6D196434984FF19D4DA /* QuartzCore.framework */,
+				D82B5A4EC30E4DECBEF9C709 /* Security.framework */,
+				2A1C75BED46032397F8A3500 /* Speech.framework */,
+				39D4F692173002D2A9FC27C6 /* UIKit.framework */,
+				0EF8CC14827D7AE496C94C35 /* WatchConnectivity.framework */,
+				806348AA9047F7E2E745C125 /* WebKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		AFB9736983970F4126416D13 /* lalela */ = {
+			isa = PBXGroup;
+			children = (
+				E493240F4E034563C90DFFF6 /* AppleAIBridge.swift */,
+				09288489FBFB13DBE292692B /* AuxoIdAuthSession.swift */,
+				FDBF15D714C7431571BE79E7 /* main.mm */,
+				EE66B5734AE4408D0A3ABAC5 /* WatchConnectivityReceiver.swift */,
+				7B0F49877551FB023A723051 /* bindings */,
+			);
+			path = lalela;
+			sourceTree = "<group>";
+		};
+		B57A6BACE9EF1DA33D71CA8A /* Externals */ = {
+			isa = PBXGroup;
+			children = (
+				14DC23510166E72BBA8B5AEF /* arm64 */,
+			);
+			path = Externals;
+			sourceTree = "<group>";
+		};
+		C2045B7528719171153389A6 = {
+			isa = PBXGroup;
+			children = (
+				4007AA2EC8DECE0C8773BBA4 /* assets */,
+				13667CD300A2AB7598604DA7 /* Assets.xcassets */,
+				4BFFB6819FDEF57762CDD55C /* LaunchScreen.storyboard */,
+				B57A6BACE9EF1DA33D71CA8A /* Externals */,
+				2E5396DFB565234D2B7F2894 /* lalela_iOS */,
+				A42272BC25FE45063A4F0191 /* LalelaWatch */,
+				CE2477D2E6371A6EBF94100D /* Sources */,
+				302B89B90B96E3B6ACC48169 /* src */,
+				ABC381AAEA6FCF28E882E38C /* Frameworks */,
+				52D601752C8FCB423C3E0490 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		CE2477D2E6371A6EBF94100D /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				AFB9736983970F4126416D13 /* lalela */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+		"TEMP_0A97750B-0CC9-4A5A-B8B6-D5620339D544" /* x86_64 */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = x86_64;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		18578D752937C70318C778CA /* LalelaWatch */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 08A289B19934D9671F722999 /* Build configuration list for PBXNativeTarget "LalelaWatch" */;
+			buildPhases = (
+				E15687437277AAE579F64070 /* Sources */,
+				785FDEC1BF237DE1784370C4 /* Resources */,
+				9B59B573E34AF9A213A09017 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = LalelaWatch;
+			packageProductDependencies = (
+			);
+			productName = LalelaWatch;
+			productReference = 70B20EB2672F52F637B0F34D /* LalelaWatch.app */;
+			productType = "com.apple.product-type.application";
+		};
+		F313D94641436C26DEA8AE53 /* lalela_iOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 66846FB8DAEC2B8FEF5076CD /* Build configuration list for PBXNativeTarget "lalela_iOS" */;
+			buildPhases = (
+				E53706EE0D42536A3EECEEF8 /* Build Rust Code */,
+				6CFCF1E369DD0471AFDD991E /* Sources */,
+				DBF717B1088C985F8A1CBB3E /* Resources */,
+				7E68E7ABAE492DAF4AE2ACFD /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = lalela_iOS;
+			packageProductDependencies = (
+			);
+			productName = lalela_iOS;
+			productReference = ACAF9DC6BFFAB586C523CA01 /* lalela_iOS.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		6DEFC17076659A8E25310C47 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					18578D752937C70318C778CA = {
+						DevelopmentTeam = "";
+					};
+					F313D94641436C26DEA8AE53 = {
+						DevelopmentTeam = "";
+					};
+				};
+			};
+			buildConfigurationList = 86053390253D71F348AD64CC /* Build configuration list for PBXProject "lalela" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = C2045B7528719171153389A6;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 52D601752C8FCB423C3E0490 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				18578D752937C70318C778CA /* LalelaWatch */,
+				F313D94641436C26DEA8AE53 /* lalela_iOS */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		785FDEC1BF237DE1784370C4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2E8AC343EFEEA4CA4E3869A4 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DBF717B1088C985F8A1CBB3E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				636C7C4C5169420A4DC9DA2A /* Assets.xcassets in Resources */,
+				5FC066B061E37B2996EABE07 /* LaunchScreen.storyboard in Resources */,
+				4319CE578A2CA3FF42ABBF42 /* assets in Resources */,
+				B1A5E0C1D2E3F40506070801 /* PrivacyInfo.xcprivacy in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		E53706EE0D42536A3EECEEF8 /* Build Rust Code */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Build Rust Code";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(SRCROOT)/Externals/x86_64/${CONFIGURATION}/libapp.a",
+				"$(SRCROOT)/Externals/arm64/${CONFIGURATION}/libapp.a",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "pnpm tauri ios xcode-script -v --platform ${PLATFORM_DISPLAY_NAME:?} --sdk-root ${SDKROOT:?} --framework-search-paths \"${FRAMEWORK_SEARCH_PATHS:?}\" --header-search-paths \"${HEADER_SEARCH_PATHS:?}\" --gcc-preprocessor-definitions \"${GCC_PREPROCESSOR_DEFINITIONS:-}\" --configuration ${CONFIGURATION:?} ${FORCE_COLOR} ${ARCHS:?}";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		6CFCF1E369DD0471AFDD991E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AC633764FE4D608CB20EFE53 /* AppleAIBridge.swift in Sources */,
+				EBEED4011EB7F7A089F38C8C /* AuxoIdAuthSession.swift in Sources */,
+				06BB24C04EAEED475F81EB03 /* WatchConnectivityReceiver.swift in Sources */,
+				1C15A72EFFB838624B270C56 /* main.mm in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E15687437277AAE579F64070 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				20EC73AC315A3FA307B26D32 /* ContentView.swift in Sources */,
+				101BB15EBB290A98B2CECFAB /* LalelaWatchApp.swift in Sources */,
+				4F2628A5960FD7CEF0B6EC58 /* WatchRecorder.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		3104552DC27457880484BB0A /* release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Apple Distribution";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_BITCODE = NO;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = LalelaWatch/Info.plist;
+				MARKETING_VERSION = 1.2.0;
+				PRODUCT_BUNDLE_IDENTIFIER = digital.auxo.lalela.watchkitapp;
+				PRODUCT_NAME = Lalela;
+				PROVISIONING_PROFILE_SPECIFIER = "Lalela Watch App Store";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 10.0;
+			};
+			name = release;
+		};
+		554EA6EAC75E5A8E9E1A2095 /* release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ARCHS = (
+					arm64,
+				);
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = lalela_iOS/lalela_iOS.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Distribution";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_BITCODE = NO;
+				"EXCLUDED_ARCHS[sdk=iphoneos*]" = x86_64;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\".\"",
+				);
+				INFOPLIST_FILE = lalela_iOS/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				"LIBRARY_SEARCH_PATHS[arch=arm64]" = "$(inherited) $(PROJECT_DIR)/Externals/arm64/$(CONFIGURATION) $(SDKROOT)/usr/lib/swift $(DEVELOPER_DIR)/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/$(PLATFORM_NAME) $(DEVELOPER_DIR)/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift-5.0/$(PLATFORM_NAME)";
+				"LIBRARY_SEARCH_PATHS[arch=x86_64]" = "$(inherited) $(PROJECT_DIR)/Externals/x86_64/$(CONFIGURATION) $(SDKROOT)/usr/lib/swift $(DEVELOPER_DIR)/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/$(PLATFORM_NAME) $(DEVELOPER_DIR)/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift-5.0/$(PLATFORM_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = digital.auxo.lalela;
+				PRODUCT_NAME = "Lalela";
+				PROVISIONING_PROFILE_SPECIFIER = "Lalela App Store";
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALID_ARCHS = arm64;
+			};
+			name = release;
+		};
+		9B74A17A13126D5E419B2242 /* debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = debug;
+		};
+		C52D1EA09B32F2AEE54AE444 /* debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ARCHS = (
+					arm64,
+				);
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = lalela_iOS/lalela_iOS.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = "";
+				ENABLE_BITCODE = NO;
+				"EXCLUDED_ARCHS[sdk=iphoneos*]" = x86_64;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\".\"",
+				);
+				INFOPLIST_FILE = lalela_iOS/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				"LIBRARY_SEARCH_PATHS[arch=arm64]" = "$(inherited) $(PROJECT_DIR)/Externals/arm64/$(CONFIGURATION) $(SDKROOT)/usr/lib/swift $(DEVELOPER_DIR)/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/$(PLATFORM_NAME) $(DEVELOPER_DIR)/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift-5.0/$(PLATFORM_NAME)";
+				"LIBRARY_SEARCH_PATHS[arch=x86_64]" = "$(inherited) $(PROJECT_DIR)/Externals/x86_64/$(CONFIGURATION) $(SDKROOT)/usr/lib/swift $(DEVELOPER_DIR)/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/$(PLATFORM_NAME) $(DEVELOPER_DIR)/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift-5.0/$(PLATFORM_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = digital.auxo.lalela;
+				PRODUCT_NAME = "Lalela";
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALID_ARCHS = arm64;
+			};
+			name = debug;
+		};
+		C579707F82E661FE8ADD1C12 /* release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+			};
+			name = release;
+		};
+		EEDB11AFAD71F8E41E889B0A /* debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_BITCODE = NO;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = LalelaWatch/Info.plist;
+				MARKETING_VERSION = 1.2.0;
+				PRODUCT_BUNDLE_IDENTIFIER = digital.auxo.lalela.watchkitapp;
+				PRODUCT_NAME = Lalela;
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 10.0;
+			};
+			name = debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		08A289B19934D9671F722999 /* Build configuration list for PBXNativeTarget "LalelaWatch" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EEDB11AFAD71F8E41E889B0A /* debug */,
+				3104552DC27457880484BB0A /* release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = debug;
+		};
+		66846FB8DAEC2B8FEF5076CD /* Build configuration list for PBXNativeTarget "lalela_iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C52D1EA09B32F2AEE54AE444 /* debug */,
+				554EA6EAC75E5A8E9E1A2095 /* release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = debug;
+		};
+		86053390253D71F348AD64CC /* Build configuration list for PBXProject "lalela" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9B74A17A13126D5E419B2242 /* debug */,
+				C579707F82E661FE8ADD1C12 /* release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 6DEFC17076659A8E25310C47 /* Project object */;
+}

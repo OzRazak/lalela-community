@@ -1,0 +1,38 @@
+/* Amp kit · tokens · v0.2.1 · source: OzRazak/auxo-amp · do not hand-edit — re-run scripts/add.mjs to update */
+/* ===========================================================================
+   Amp tokens — Tailwind v4 bridge (@theme).
+   Consumed by the 14 Next 15/16 · React 19 · Tailwind v4 estate apps.
+   Values are the estate verbatim-PASS reference (Lalela system), kept
+   byte-identical to auxo-aion/app/globals.css @theme so drift is diffable.
+   Source of truth for the values: ./tokens.json — a vitest test asserts this
+   file and tokens.json agree. Do NOT hand-edit values here; edit tokens.json.
+   Tailwind v3 consumers use ./tailwind-v3.preset.cjs instead of this file.
+   =========================================================================== */
+@import "tailwindcss";
+@import "./motion.css";
+
+@theme {
+  --color-background: #ffffff;
+  --color-foreground: #0f172a;
+  --color-muted: #f1f5f9;
+  --color-muted-foreground: #64748b;
+  --color-border: #e2e8f0;
+  --color-card: #ffffff;
+  --color-surface: #f8fafc;
+
+  --color-primary: #ffd200;
+  --color-primary-foreground: #1a1a1a;
+  --color-accent: hsl(220 80% 55%);
+  --color-accent-foreground: #ffffff;
+  --color-danger: #dc2626;
+
+  --radius: 0.5rem;
+  --radius-card: 0.5rem;
+  --radius-panel: 0.5rem;
+  --font-sans: var(--font-montserrat), ui-sans-serif, system-ui, sans-serif;
+}
+
+/* Default every border to the token colour (mirrors the Lalela globals). */
+* {
+  border-color: var(--color-border);
+}

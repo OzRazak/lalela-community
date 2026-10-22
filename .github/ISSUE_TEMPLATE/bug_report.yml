@@ -1,0 +1,48 @@
+name: Bug report
+description: Something in Lalela Community does not work as it should.
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting. Please search existing issues first.
+        **Security problems:** do not file them here — see SECURITY.md.
+        **The official app** (accounts, sync, sharing, App Store): contact Lalela support instead; this tracker is for the Community edition.
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened, and what did you expect?
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: "1. …\n2. …\n3. …"
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Commit or version you built
+      placeholder: e.g. a1b2c3d
+    validations:
+      required: true
+  - type: input
+    id: macos
+    attributes:
+      label: macOS version and Mac model
+      placeholder: e.g. macOS 26.1, MacBook Air M2
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs or screenshots
+      description: Remove anything private (meeting content, names, keys) before pasting.
+  - type: checkboxes
+    id: pr
+    attributes:
+      label: Contributing a fix
+      options:
+        - label: I would like to send a fix, and I will sign off my commits under the DCO (see CONTRIBUTING.md).

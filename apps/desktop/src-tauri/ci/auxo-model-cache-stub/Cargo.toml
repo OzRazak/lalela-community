@@ -1,0 +1,23 @@
+# A stand-in for the PRIVATE `auxo-model-cache` crate (an estate-shared,
+# download-once model store used by the official macOS build). Two users:
+#
+# 1. The Windows CI `[patch]` (private repo): the Windows bundle job holds no
+#    credentials by design (it must never be able to touch the updater signing
+#    key), and cargo resolves every target's dependency table whatever
+#    --target you pass — so a private git dependency that only macOS *uses* is
+#    still one the Windows runner tries to *fetch*. Feature-gating does not
+#    help because the tauri CLI runs its own `cargo metadata` without
+#    forwarding `--no-default-features` (proven 2026-09-21). A [patch] to a
+#    local path is the one thing that stops cargo reaching for the network.
+# 2. The open-source Community edition, whose exported Cargo.toml depends on
+#    this path directly (scripts/oss/transform.mjs), because the public repo
+#    cannot fetch a private crate.
+#
+# `shared_dir_adopting` always returns Err, so callers fall back to Lalela's
+# own per-app models directory — the behaviour every non-macOS target has.
+[package]
+name = "auxo-model-cache"
+version = "0.1.0"
+edition = "2021"
+publish = false
+license = "Apache-2.0"

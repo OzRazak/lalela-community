@@ -1,0 +1,18 @@
+# Lalela's alternative-ASR sidecar host. Speech engines beyond whisper.cpp
+# (Parakeet, Granite) load HERE, out of the app process — whisper-rs vendors
+# ggml and a second speech runtime (NeMo/MLX/ONNX) linked into the app would
+# collide or bloat it (the same reason llama.cpp lives in lalela-llm).
+#
+# This crate currently compiles with NO engines: it serves the protocol and
+# advertises an empty engine list. The first real engine (Parakeet) lands as a
+# feature-gated module without touching the app-side plumbing.
+[package]
+name = "lalela-asr"
+version = "0.1.0"
+description = "Lalela alt-ASR sidecar: hosts non-whisper speech engines behind a stdio JSON protocol"
+edition = "2021"
+
+[dependencies]
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+base64 = "0.22"

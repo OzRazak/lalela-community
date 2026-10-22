@@ -1,0 +1,221 @@
+/* Amp kit · primitives · v0.2.1 · source: OzRazak/auxo-amp · do not hand-edit — re-run scripts/add.mjs to update */
+/* ===========================================================================
+   Amp primitives — the First-Mile layer's styling + celebration motion.
+   Uses the Amp tokens (colors) and motion tokens (from @auxo/amp-tokens
+   motion.css). ALL personality motion (spring-tick, burst, shimmer) is gated
+   OFF under two triggers, mirroring motion.css — reduce ≠ remove:
+     1. @media (prefers-reduced-motion: reduce)
+     2. [data-amp="0"] / [data-amp-sober]  (dial 0 & <SoberZone>)
+   At dial 0 a Milestone is a static ink check; an EmptyState is a static mark.
+   =========================================================================== */
+
+/* ── EmptyState ──────────────────────────────────────────────────────────── */
+.amp-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 3.5rem 1.5rem;
+  text-align: center;
+}
+.amp-empty-mark { display: inline-flex; }
+.amp-empty-title { font-weight: 600; color: var(--color-foreground, #0f172a); }
+.amp-empty-body {
+  margin-top: 0.25rem;
+  max-width: 24rem;
+  font-size: 0.875rem;
+  color: var(--color-muted-foreground, #64748b);
+}
+.amp-empty-action { margin-top: 1rem; }
+.amp-empty[data-amp-tone="sober"] .amp-empty-title { font-weight: 600; }
+
+/* The one generic ghost skeleton (opt-in). */
+.amp-empty-ghost {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+  max-width: 20rem;
+  margin-bottom: 1rem;
+}
+.amp-skel {
+  display: block;
+  height: 0.75rem;
+  border-radius: 0.375rem;
+  background: linear-gradient(
+    90deg,
+    var(--color-muted, #f1f5f9) 0%,
+    var(--color-border, #e2e8f0) 50%,
+    var(--color-muted, #f1f5f9) 100%
+  );
+  background-size: 200% 100%;
+  animation: amp-shimmer 1.4s ease-in-out infinite;
+}
+
+/* ── Welcome ─────────────────────────────────────────────────────────────── */
+.amp-welcome {
+  position: relative;
+  border: 1px solid var(--color-border, #e2e8f0);
+  border-radius: var(--radius-card, 0.5rem);
+  background: var(--color-card, #fff);
+  padding: 1.25rem 1.25rem 1.5rem;
+}
+.amp-welcome-dismiss {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  color: var(--color-muted-foreground, #64748b);
+  padding: 0.25rem;
+  border-radius: 0.375rem;
+}
+.amp-welcome-dismiss:hover { background: var(--color-muted, #f1f5f9); color: var(--color-foreground, #0f172a); }
+.amp-welcome-head { display: flex; align-items: center; gap: 0.625rem; }
+.amp-welcome-mark { display: inline-flex; }
+.amp-welcome-title { font-size: 1.05rem; font-weight: 700; margin: 0; color: var(--color-foreground, #0f172a); }
+.amp-welcome-body { margin: 0.5rem 0 0; font-size: 0.9rem; color: var(--color-muted-foreground, #64748b); }
+.amp-welcome-cta {
+  display: inline-block;
+  margin-top: 1rem;
+  border: 0;
+  border-radius: var(--radius, 0.5rem);
+  background: var(--color-primary, #ffd200);
+  color: var(--color-primary-foreground, #1a1a1a);
+  font-weight: 600;
+  font-size: 0.875rem;
+  padding: 0.5rem 0.875rem;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+/* ── Checklist ───────────────────────────────────────────────────────────── */
+.amp-checklist {
+  border: 1px solid var(--color-border, #e2e8f0);
+  border-radius: var(--radius-card, 0.5rem);
+  background: var(--color-card, #fff);
+  padding: 1rem 1.25rem;
+}
+.amp-checklist-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.5rem; }
+.amp-checklist-title { font-weight: 600; }
+.amp-checklist-count { font-size: 0.75rem; color: var(--color-muted-foreground, #64748b); }
+.amp-checklist-steps { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.5rem; }
+.amp-checklist-step { display: flex; align-items: flex-start; gap: 0.625rem; }
+.amp-checklist-bullet {
+  flex: 0 0 auto;
+  width: 1.15rem;
+  height: 1.15rem;
+  margin-top: 0.05rem;
+  border-radius: 9999px;
+  border: 2px solid var(--color-border, #e2e8f0);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-primary-foreground, #1a1a1a);
+  transition: background var(--amp-effect-fast-duration, 120ms) var(--amp-effect-fast-easing, ease),
+    border-color var(--amp-effect-fast-duration, 120ms) var(--amp-effect-fast-easing, ease);
+}
+.amp-checklist-step[data-amp-done] .amp-checklist-bullet {
+  background: var(--color-primary, #ffd200);
+  border-color: var(--color-primary, #ffd200);
+}
+.amp-checklist-text { display: flex; flex-direction: column; gap: 0.125rem; }
+.amp-checklist-label { font-size: 0.9rem; }
+.amp-checklist-step[data-amp-done] .amp-checklist-label { color: var(--color-muted-foreground, #64748b); text-decoration: line-through; }
+.amp-checklist-hint { font-size: 0.8rem; color: var(--color-muted-foreground, #64748b); }
+.amp-checklist-action {
+  margin-left: auto;
+  border: 1px solid var(--color-border, #e2e8f0);
+  border-radius: var(--radius, 0.5rem);
+  background: transparent;
+  cursor: pointer;
+  font-size: 0.8rem;
+  padding: 0.25rem 0.625rem;
+  text-decoration: none;
+  color: var(--color-foreground, #0f172a);
+}
+.amp-checklist-done { margin-top: 0.75rem; }
+
+/* ── Milestone (the graded ladder) ───────────────────────────────────────── */
+.amp-milestone {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.375rem 0.125rem;
+}
+.amp-milestone-check {
+  flex: 0 0 auto;
+  width: 1.4rem;
+  height: 1.4rem;
+  border-radius: 9999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-muted, #f1f5f9);
+  color: var(--color-foreground, #0f172a);
+}
+.amp-milestone-body { display: inline-flex; flex-direction: column; }
+.amp-milestone-label { font-weight: 600; font-size: 0.9rem; }
+.amp-milestone-message { font-size: 0.8rem; color: var(--color-muted-foreground, #64748b); }
+
+/* rung 1 — spring-tick: the check pops in on a spatial spring. */
+.amp-milestone[data-amp-rung="1"] .amp-milestone-check,
+.amp-milestone[data-amp-rung="2"] .amp-milestone-check {
+  background: var(--color-primary, #ffd200);
+  color: var(--color-primary-foreground, #1a1a1a);
+  animation: amp-spring-tick var(--amp-spatial-fast-duration, 150ms) var(--amp-spatial-fast-easing, ease) both;
+}
+/* rung 2 — full yellow burst (accent moments only). */
+.amp-milestone-burst {
+  position: absolute;
+  left: 0.7rem;
+  top: 50%;
+  width: 1.4rem;
+  height: 1.4rem;
+  transform: translate(-50%, -50%);
+  border-radius: 9999px;
+  background: radial-gradient(circle, var(--color-primary, #ffd200) 0%, transparent 70%);
+  pointer-events: none;
+  animation: amp-burst var(--amp-spatial-slow-duration, 450ms) var(--amp-spatial-default-easing, ease) both;
+}
+
+@keyframes amp-shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+@keyframes amp-spring-tick {
+  0% { transform: scale(0.2); opacity: 0; }
+  60% { transform: scale(1.15); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+@keyframes amp-burst {
+  0% { transform: translate(-50%, -50%) scale(0.3); opacity: 0.9; }
+  100% { transform: translate(-50%, -50%) scale(4); opacity: 0; }
+}
+
+/* ── Reduced-motion / dial-0 / sober collapse (reduce ≠ remove) ──────────── */
+@media (prefers-reduced-motion: reduce) {
+  .amp-skel,
+  .amp-milestone-check,
+  .amp-milestone-burst { animation: none !important; }
+  .amp-milestone-burst { display: none; }
+}
+[data-amp="0"] .amp-skel,
+[data-amp-sober] .amp-skel,
+[data-amp="0"] .amp-milestone-check,
+[data-amp-sober] .amp-milestone-check,
+[data-amp="0"] .amp-milestone-burst,
+[data-amp-sober] .amp-milestone-burst {
+  animation: none !important;
+}
+[data-amp="0"] .amp-milestone-burst,
+[data-amp-sober] .amp-milestone-burst { display: none; }
+/* At dial 0 the milestone check is the calm ink check, never the yellow pop. */
+[data-amp="0"] .amp-milestone-check,
+[data-amp-sober] .amp-milestone-check {
+  background: var(--color-muted, #f1f5f9);
+  color: var(--color-foreground, #0f172a);
+}

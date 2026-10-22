@@ -1,0 +1,13 @@
+{
+  "name": "lalela-community",
+  "private": true,
+  "version": "0.0.0",
+  "license": "Apache-2.0",
+  "packageManager": "pnpm@11.9.0",
+  "scripts": {
+    "dev": "pnpm --filter @lalela/desktop tauri dev",
+    "build": "pnpm --filter @lalela/desktop tauri build",
+    "typecheck": "pnpm --filter @lalela/desktop typecheck",
+    "test": "pnpm --filter @lalela/desktop test"
+  }
+}

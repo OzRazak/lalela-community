@@ -1,0 +1,16 @@
+{
+  "$schema": "../gen/schemas/desktop-schema.json",
+  "identifier": "settings-deeplinks",
+  "description": "OS settings deep-links used by the permission and troubleshooting copy (onboarding 'Open settings', 'Open microphone settings' / 'Open sound settings' in the recorder). `opener:default` only scopes http/https/mailto/tel, so without this the opener rejects the scheme and the buttons do nothing. Desktop only — mobile has no such URI.",
+  "platforms": ["macOS", "windows"],
+  "windows": ["main"],
+  "permissions": [
+    {
+      "identifier": "opener:allow-open-url",
+      "allow": [
+        { "url": "ms-settings:*" },
+        { "url": "x-apple.systempreferences:*" }
+      ]
+    }
+  ]
+}

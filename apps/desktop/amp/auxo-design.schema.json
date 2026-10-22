@@ -1,0 +1,40 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/OzRazak/auxo-amp/packages/schema/auxo-design.schema.json",
+  "title": "auxo-design.json",
+  "description": "Per-app Amp design-language manifest. Everything in Amp resolves mechanically from this file — agents apply Amp by lookup, never judgment.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["dial", "archetype", "soberZones", "brandNamespace"],
+  "properties": {
+    "$schema": { "type": "string" },
+    "dial": {
+      "description": "Playfulness dial 0–3: selects copy register, motion overshoot, celebration rung, SA-ism/emoji permission.",
+      "type": "integer",
+      "enum": [0, 1, 2, 3]
+    },
+    "archetype": {
+      "description": "A = dashboard, B = focused tool, C = desktop. Selects the onboarding preset.",
+      "type": "string",
+      "enum": ["A", "B", "C"]
+    },
+    "soberZones": {
+      "description": "Route/path prefixes pinned to dial 0 regardless of app dial (consent, destructive, legal). Use [] for none.",
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "brandNamespace": {
+      "description": "The app's brand namespace, e.g. 'memeza' or 'lethadocs'.",
+      "type": "string",
+      "minLength": 1
+    },
+    "moments": {
+      "description": "Opt in to <Milestone>→scoreboard reporting. Optional; default true. Privacy-first apps (e.g. lalela) set false to hard-disable moment reporting regardless of the NEXT_PUBLIC_MOMENTS_* env. (pending-Oz — Wave 8 scoreboard policy default.)",
+      "type": "boolean"
+    },
+    "sound": {
+      "description": "Force the Amp Audio default on/off, overriding the dial-derived default (dial 3 = on-whisper, dial ≤2 = off/opt-in). Optional; still user-overridable via the Settings toggle (localStorage amp:sound). Sound is only ever produced at dial ≥2 and never in a soberZone. (pending-Oz — Wave 10 audio-spec default.)",
+      "type": "boolean"
+    }
+  }
+}

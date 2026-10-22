@@ -1,0 +1,243 @@
+name: lalela
+options:
+  bundleIdPrefix: digital.auxo.lalela
+  deploymentTarget:
+    iOS: 15.0
+fileGroups: [../../src]
+configs:
+  debug: debug
+  release: release
+settingGroups:
+  app:
+    base:
+      PRODUCT_NAME: Lalela
+      PRODUCT_BUNDLE_IDENTIFIER: digital.auxo.lalela
+      DEVELOPMENT_TEAM: ""
+      # Universal: iPhone (1) + iPad (2). The app runs full-screen only on iPad
+      # (UIRequiresFullScreen below) — it's a WKWebView UI not designed for
+      # Split View / Slide Over multitasking. Going universal adds an iPad
+      # (13-inch) screenshot requirement, but only at the next App Store REVIEW
+      # submission; TestFlight builds need no iPad screenshots.
+      TARGETED_DEVICE_FAMILY: "1,2"
+    configs:
+      # App Store archives use manual distribution signing — the team has no
+      # registered devices, so automatic signing can't mint the development
+      # profile it insists on (blocks release archive with error 65). Debug
+      # keeps automatic signing for simulator/device dev.
+      release:
+        CODE_SIGN_STYLE: Manual
+        PROVISIONING_PROFILE_SPECIFIER: Lalela App Store
+        CODE_SIGN_IDENTITY: Apple Distribution
+targetTemplates:
+  app:
+    type: application
+    sources:
+      - path: Sources
+    scheme:
+      environmentVariables:
+        RUST_BACKTRACE: full
+        RUST_LOG: info
+    settings:
+      groups: [app]
+targets:
+  lalela_iOS:
+    type: application
+    platform: iOS
+    sources:
+      - path: Sources
+      - path: Assets.xcassets
+      # libapp.a is LINKED via the framework dependency + LIBRARY_SEARCH_PATHS
+      # below; keep it out of every build phase so xcodegen doesn't also copy
+      # the 74MB static lib into the .app as a resource (App Store error 90171).
+      - path: Externals
+        buildPhase: none
+      - path: lalela_iOS
+      - path: assets
+        buildPhase: resources
+        type: folder
+      - path: LaunchScreen.storyboard
+    info:
+      path: lalela_iOS/Info.plist
+      properties:
+        LSRequiresIPhoneOS: true
+        # Full-screen only on iPad — the WKWebView UI isn't built for Split
+        # View / Slide Over multitasking. Without this, universal iPad apps
+        # imply multitasking support. All four ~ipad orientations are declared
+        # below (Apple requires the full set for full-screen iPad apps).
+        UIRequiresFullScreen: true
+        # UIScene lifecycle. Apps built with the iOS 27 SDK (Xcode 27) are
+        # killed at launch without it (UIKit trap
+        # "...RuntimeIssueForNoSceneLifecycleAdoption"). tao (>= 0.35) only
+        # installs its TaoSceneDelegate when this flag is true; on iPhone it
+        # still runs a single scene.
+        UIApplicationSceneManifest:
+          UIApplicationSupportsMultipleScenes: true
+        UILaunchStoryboardName: LaunchScreen
+        UIRequiredDeviceCapabilities: [arm64, metal]
+        UISupportedInterfaceOrientations:
+          - UIInterfaceOrientationPortrait
+          - UIInterfaceOrientationLandscapeLeft
+          - UIInterfaceOrientationLandscapeRight
+        UISupportedInterfaceOrientations~ipad:
+          - UIInterfaceOrientationPortrait
+          - UIInterfaceOrientationPortraitUpsideDown
+          - UIInterfaceOrientationLandscapeLeft
+          - UIInterfaceOrientationLandscapeRight
+        CFBundleShortVersionString: 1.3.11
+        CFBundleVersion: "1.3.11"
+    entitlements:
+      path: lalela_iOS/lalela_iOS.entitlements
+    scheme:
+      environmentVariables:
+        RUST_BACKTRACE: full
+        RUST_LOG: info
+    settings:
+      base:
+        ENABLE_BITCODE: false
+        ARCHS: [arm64]
+        VALID_ARCHS: arm64 
+        LIBRARY_SEARCH_PATHS[arch=x86_64]: $(inherited) $(PROJECT_DIR)/Externals/x86_64/$(CONFIGURATION) $(SDKROOT)/usr/lib/swift $(DEVELOPER_DIR)/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/$(PLATFORM_NAME) $(DEVELOPER_DIR)/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift-5.0/$(PLATFORM_NAME)
+        LIBRARY_SEARCH_PATHS[arch=arm64]: $(inherited) $(PROJECT_DIR)/Externals/arm64/$(CONFIGURATION) $(SDKROOT)/usr/lib/swift $(DEVELOPER_DIR)/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/$(PLATFORM_NAME) $(DEVELOPER_DIR)/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift-5.0/$(PLATFORM_NAME)
+        ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES: true
+        # First-party Swift enters the app target with AppleAIBridge.swift (the
+        # in-process Apple-Intelligence bridge), so the target needs an explicit
+        # Swift language version — there was no Swift here before.
+        SWIFT_VERSION: "5.0"
+        EXCLUDED_ARCHS[sdk=iphoneos*]: x86_64
+      groups: [app]
+    dependencies:
+      - framework: libapp.a
+        embed: false
+      # Rust-side `cargo:rustc-link-lib=framework=` flags don't survive into the
+      # libapp.a staticlib, so frameworks used by native deps are listed here:
+      # Accelerate = whisper.cpp ggml (vDSP); AVFAudio = AVAudioSession record
+      # mode; CoreAudio/AudioToolbox = cpal's iOS input backend.
+      - sdk: Accelerate.framework
+      - sdk: AVFAudio.framework
+      - sdk: AudioToolbox.framework
+      - sdk: CoreAudio.framework
+      - sdk: CoreGraphics.framework
+      - sdk: Metal.framework
+      - sdk: MetalKit.framework
+      - sdk: QuartzCore.framework
+      - sdk: Security.framework
+      - sdk: UIKit.framework
+      - sdk: WebKit.framework
+      # Apple-Intelligence bridge (AppleAIBridge.swift, iOS 26+). WEAK-linked so
+      # the app still LOADS on iOS 14–25, where these frameworks don't exist:
+      # every reference to their symbols is guarded by `#available(iOS 26.0, *)`,
+      # so dyld never needs to bind them below 26. FoundationModels =
+      # SystemLanguageModel synthesis (Phase 4); Speech = SpeechTranscriber ASR
+      # (Phase 5); AVFoundation + CoreMedia = the PCM-buffer conversion the ASR
+      # feed path needs — listed now so Phases 4/5 don't have to re-run xcodegen.
+      - sdk: FoundationModels.framework
+        weak: true
+      - sdk: Speech.framework
+        weak: true
+      - sdk: AVFoundation.framework
+        weak: true
+      - sdk: CoreMedia.framework
+        weak: true
+      # Receive recordings sent from the paired Apple Watch (WatchInbox in
+      # WatchConnectivityReceiver.swift).
+      - sdk: WatchConnectivity.framework
+      # "Continue with Auxo ID" in-app sign-in sheet (ASWebAuthenticationSession
+      # in AuxoIdAuthSession.swift). No URL scheme is registered: the session
+      # intercepts its lalela:// callback itself.
+      - sdk: AuthenticationServices.framework
+      # The LalelaWatch companion IS shipped inside the IPA, but deliberately NOT
+      # via a `- target: LalelaWatch / embed: true` dependency here. `tauri ios
+      # build` archives through cargo-mobile2, which runs `xcodebuild ... -sdk
+      # iphoneos ... archive` (hardcoded — cargo-mobile2 target.rs). That global
+      # `-sdk iphoneos` forces EVERY target in the build graph onto the iPhone
+      # SDK, so an embedded watch target would build a second Lalela.app under
+      # iphoneos and collide ("Multiple commands produce Lalela.app"), failing
+      # the archive. The tauri options socket (write_options/read_options over
+      # 127.0.0.1) that the "Build Rust Code" phase needs is only alive inside
+      # `tauri ios build`, so we also can't swap in a plain `xcodebuild archive
+      # -destination 'generic/platform=iOS'` (the Rust phase would hit the
+      # "Connection refused" trap). So the pipeline embeds POST-archive:
+      # scripts/appstore/ios_build_appstore.sh archives the phone via tauri
+      # (Rust phase intact, no watch in the graph), builds the watch separately
+      # against the watchOS SDK (no Rust phase → plain xcodebuild is fine),
+      # copies LalelaWatch's Lalela.app into Lalela.app/Watch/, and lets
+      # `xcodebuild -exportArchive` sign both from one ExportOptions.plist that
+      # lists the phone AND watch bundle ids. See docs/APP-STORE-RELEASE.md §2.5.
+    preBuildScripts:
+      - script: pnpm tauri ios xcode-script -v --platform ${PLATFORM_DISPLAY_NAME:?} --sdk-root ${SDKROOT:?} --framework-search-paths "${FRAMEWORK_SEARCH_PATHS:?}" --header-search-paths "${HEADER_SEARCH_PATHS:?}" --gcc-preprocessor-definitions "${GCC_PREPROCESSOR_DEFINITIONS:-}" --configuration ${CONFIGURATION:?} ${FORCE_COLOR} ${ARCHS:?}
+        name: Build Rust Code
+        basedOnDependencyAnalysis: false
+        outputFiles:
+          - $(SRCROOT)/Externals/x86_64/${CONFIGURATION}/libapp.a
+          - $(SRCROOT)/Externals/arm64/${CONFIGURATION}/libapp.a
+
+  # ---------------------------------------------------------------------------
+  # watchOS companion — a single-purpose discreet voice recorder (ships 1.2.0).
+  # Records mono 16 kHz PCM WAV and hands each file to the paired iPhone via
+  # WatchConnectivity transferFile; the iOS receiver drops them into watch-inbox/
+  # and Rust (watch_inbox.rs) imports them through whisper. NOT a Tauri app — a
+  # plain SwiftUI watchOS target, so tauri.conf/version stays untouched. Its
+  # marketing + build version are AUTO-SYNCED to the iPhone app at release time:
+  # CFBundleShortVersionString / CFBundleVersion below resolve from the
+  # MARKETING_VERSION / CURRENT_PROJECT_VERSION build settings, which the App
+  # Store pipeline (ios_build_appstore.sh) overrides from tauri.conf.json's
+  # `version` when it builds the watch — the SAME single source of truth tauri
+  # stamps the phone from. The literals here are only a dev/simulator fallback;
+  # a `version` bump in tauri.conf.json flows to BOTH apps with no edit here.
+  # See docs/APP-STORE-RELEASE.md §2.5. Apple requires watch == phone version.
+  LalelaWatch:
+    type: application
+    platform: watchOS
+    deploymentTarget: "10.0"
+    sources:
+      - path: LalelaWatch
+    info:
+      path: LalelaWatch/Info.plist
+      properties:
+        CFBundleDisplayName: Lalela
+        # Single-target watchOS app marker + link to the iOS companion.
+        WKApplication: true
+        WKCompanionAppBundleIdentifier: digital.auxo.lalela
+        # Discreet recorder needs the mic plus background audio so recording
+        # survives the wrist dropping / screen turning off. Verified against
+        # Apple docs: watchOS background audio uses the iOS-style
+        # UIBackgroundModes:[audio] — NOT WKBackgroundModes, NOT an extended
+        # runtime session (those can't host mic capture).
+        NSMicrophoneUsageDescription: "Lalela records your voice so it can turn it into meeting notes on your iPhone. Audio syncs privately to your phone."
+        UIBackgroundModes:
+          - audio
+        # Resolved from the build settings below at build time; the App Store
+        # pipeline overrides those with tauri.conf.json's version (see comment
+        # at the top of this target). $(...) is an Xcode build-setting ref, left
+        # untouched by xcodegen (which only expands ${ENV}).
+        CFBundleShortVersionString: $(MARKETING_VERSION)
+        CFBundleVersion: $(CURRENT_PROJECT_VERSION)
+    settings:
+      base:
+        PRODUCT_NAME: Lalela
+        PRODUCT_BUNDLE_IDENTIFIER: digital.auxo.lalela.watchkitapp
+        DEVELOPMENT_TEAM: ""
+        # 4 = Apple Watch.
+        TARGETED_DEVICE_FAMILY: "4"
+        SWIFT_VERSION: "5.0"
+        # Dev/simulator fallback only — ios_build_appstore.sh overrides both with
+        # tauri.conf.json's `version` so the shipped watch == the phone. Keep in
+        # step with tauri.conf.json if you build the watch outside the pipeline.
+        MARKETING_VERSION: 1.3.11
+        CURRENT_PROJECT_VERSION: 1.3.11
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        GENERATE_INFOPLIST_FILE: NO
+        ENABLE_BITCODE: false
+      configs:
+        # Debug (simulator/dev) keeps automatic signing — no registered devices
+        # needed. Release uses manual App Store signing with the profile created
+        # for digital.auxo.lalela.watchkitapp, matching the iOS app's scheme.
+        release:
+          CODE_SIGN_STYLE: Manual
+          PROVISIONING_PROFILE_SPECIFIER: Lalela Watch App Store
+          CODE_SIGN_IDENTITY: Apple Distribution
+    dependencies:
+      - sdk: WatchConnectivity.framework
+    scheme:
+      environmentVariables:
+        RUST_BACKTRACE: full

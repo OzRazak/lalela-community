@@ -1,0 +1,20 @@
+{
+  "$schema": "../gen/schemas/desktop-schema.json",
+  "identifier": "dictation",
+  "description": "System-wide dictation hotkey (Wave B2). macOS and Windows — registration is Rust-side (the global-shortcut plugin); this capability keeps the guest bindings available if the webview ever drives it. The window-scoped permissions let the overlay drag itself (native window drag) and resize itself (the SE grip reads its size and calls setSize); its position + size are saved/restored Rust-side.",
+  "platforms": [
+    "macOS",
+    "windows"
+  ],
+  "windows": [
+    "main",
+    "dictation"
+  ],
+  "permissions": [
+    "global-shortcut:default",
+    "core:window:allow-start-dragging",
+    "core:window:allow-set-size",
+    "core:window:allow-inner-size",
+    "core:window:allow-scale-factor"
+  ]
+}

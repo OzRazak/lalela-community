@@ -1,0 +1,11 @@
+{
+  "$schema": "./amp/auxo-design.schema.json",
+  "dial": 2,
+  "archetype": "C",
+  "soberZones": [
+    "src/components/ConsentDialog.tsx",
+    "src/components/ConfirmDialog.tsx",
+    "src/components/ShareDialog.tsx"
+  ],
+  "brandNamespace": "lalela"
+}

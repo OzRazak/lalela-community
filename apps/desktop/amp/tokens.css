@@ -1,0 +1,48 @@
+/* Amp kit · tokens · v0.2.1 · source: OzRazak/auxo-amp · do not hand-edit — re-run scripts/add.mjs to update */
+/* ===========================================================================
+   Amp tokens — plain CSS custom-property layer (the v3 / non-@theme bridge).
+
+   WHY THIS FILE EXISTS. The Amp component CSS (primitives.css, the Spark's
+   spark.css, the Tour/StubSpark inline styles) reads its colours and radii from
+   `--color-*` / `--radius-*` custom properties. In the Tailwind v4 era those are
+   emitted for free by theme.css's `@theme {}` block. The v3 bridge
+   (tailwind-v3.preset.cjs) only registers Tailwind *utility classes* — it does
+   NOT emit these custom properties — so a React-18 / Tailwind-v3 consumer had no
+   equivalent, and Amp components silently fell back to their hard-coded literals
+   (fine in a light theme, wrong under a dark one).
+
+   This file closes that gap: it is the v3-era equivalent of the v4 `@theme`
+   variable output. Import it once in a v3 app's global stylesheet (alongside
+   ./motion.css) so every Amp surface themes off the tokens instead of fallbacks:
+
+       @import "amp/tokens.css";   (or import it from your root layout)
+       @import "amp/motion.css";
+
+   Values are byte-identical to theme.css / tokens.json — a vitest drift test
+   asserts this file and tokens.json agree, so the two eras can never diverge.
+   Do NOT hand-edit values here; edit tokens.json.
+
+   A consumer that already has its own themed token layer (e.g. a shadcn app with
+   `--primary` HSL tuples) can instead MAP `--color-*` onto its own variables so
+   Amp inherits its light AND dark themes — see the README "Tailwind v3" section.
+   =========================================================================== */
+:root {
+  --color-background: #ffffff;
+  --color-foreground: #0f172a;
+  --color-muted: #f1f5f9;
+  --color-muted-foreground: #64748b;
+  --color-border: #e2e8f0;
+  --color-card: #ffffff;
+  --color-surface: #f8fafc;
+
+  --color-primary: #ffd200;
+  --color-primary-foreground: #1a1a1a;
+  --color-accent: hsl(220 80% 55%);
+  --color-accent-foreground: #ffffff;
+  --color-danger: #dc2626;
+
+  --radius: 0.5rem;
+  --radius-card: 0.5rem;
+  --radius-panel: 0.5rem;
+  --font-sans: var(--font-montserrat), ui-sans-serif, system-ui, sans-serif;
+}

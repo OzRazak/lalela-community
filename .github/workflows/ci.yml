@@ -1,0 +1,88 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  CMAKE_POLICY_VERSION_MINIMUM: "3.5"
+  CARGO_TERM_COLOR: always
+
+jobs:
+  dco:
+    name: DCO sign-off
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Every commit carries Signed-off-by
+        env:
+          BASE: ${{ github.event.pull_request.base.sha }}
+          HEAD: ${{ github.event.pull_request.head.sha }}
+        run: |
+          missing=0
+          for c in $(git rev-list --no-merges "$BASE..$HEAD"); do
+            if ! git show -s --format=%B "$c" | grep -qE '^Signed-off-by: .+ <.+>'; then
+              echo "::error::Commit $c is missing a Signed-off-by line (git commit -s). See CONTRIBUTING.md."
+              missing=1
+            fi
+          done
+          exit $missing
+
+  frontend:
+    name: Frontend typecheck + tests
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm typecheck
+      - run: pnpm test
+      - name: Community build has no hosted-service values
+        working-directory: apps/desktop
+        run: |
+          node_modules/.bin/vite build --outDir "$RUNNER_TEMP/dist"
+          # Keys and project URLs, not library code (posthog-js and
+          # supabase-js are bundled but never initialised in this edition).
+          if grep -rlE 'sb_publi[s]hable|phc_[A-Za-z0-9]{20,}|[a-z]{20}\.supabase\.co' "$RUNNER_TEMP/dist"; then
+            echo "::error::hosted-service configuration found in the Community bundle"
+            exit 1
+          fi
+
+  rust:
+    name: Rust tests (macOS) + iOS check
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: aarch64-apple-ios
+          components: llvm-tools
+      - name: Install CMake
+        run: brew list cmake >/dev/null 2>&1 || brew install cmake
+      - uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: apps/desktop/src-tauri
+      # tauri::generate_context! needs the frontend dist folder to exist.
+      - name: Placeholder frontend dist
+        run: mkdir -p apps/desktop/dist && echo '<!doctype html>' > apps/desktop/dist/index.html
+      - name: cargo test --workspace
+        working-directory: apps/desktop/src-tauri
+        run: cargo test --workspace
+      - name: cargo check --target aarch64-apple-ios
+        working-directory: apps/desktop/src-tauri
+        run: cargo check --target aarch64-apple-ios

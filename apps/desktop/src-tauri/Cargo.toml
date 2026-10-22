@@ -1,0 +1,212 @@
+# Workspace so the local-LLM sidecar builds as its OWN binary: llama-cpp-2 and
+# whisper-rs both vendor ggml and cannot link into one executable (duplicate
+# symbols). The main app never depends on llama; it talks to lalela-llm over
+# stdio (see src/local_llm.rs).
+[workspace]
+members = [".", "crates/lalela-llm", "crates/lalela-asr"]
+# ci/auxo-model-cache-stub stands in for a private crate the official build
+# uses (see the auxo-model-cache dependency below); it is a path dependency,
+# not a workspace member.
+exclude = ["ci/auxo-model-cache-stub", "vendor/swift-rs", "vendor/tao"]
+
+[package]
+name = "lalela"
+version = "0.1.0"
+description = "Lalela — privacy-first meeting notetaker"
+authors = ["Auxo Digital"]
+edition = "2021"
+# We ship two binaries (lalela = GUI, lalela-mcp = MCP sidecar). Without this, Tauri's
+# bundler can pick the wrong one as the app's CFBundleExecutable → the .app launches
+# the headless MCP server and quits instantly. Pin the GUI as the primary binary.
+default-run = "lalela"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[lib]
+# The `_lib` suffix may seem redundant but it is necessary
+# to make the lib name unique and wouldn't conflict with the bin name.
+# This seems to be only an issue on Windows, see https://github.com/rust-lang/cargo/issues/8519
+name = "lalela_lib"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[features]
+# Microsoft Store variant (built by .github/workflows/windows.yml, `store` input, with
+# `--features store`). It only SUPPRESSES the self-updater plugin registration
+# in src/lib.rs: the Store re-signs and updates the MSIX itself, and
+# tauri.store.conf.json strips `plugins.updater`, which makes the updater
+# plugin panic at startup on a null/missing config. Default features are
+# unchanged, so the normal direct-download build is untouched.
+store = []
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+# build.rs reads tauri.conf.json / TAURI_CONFIG to match identifier to edition.
+serde_json = "1"
+
+
+# Cross-platform core (must build for iOS too).
+[dependencies]
+# `macos-private-api`: required to match `app.macOSPrivateApi: true` in
+# tauri.conf.json, which the Meeting Copilot's `transparent(true)` overlay needs
+# on macOS. The feature is a compile-time no-op on non-macOS targets (its window
+# code is `#[cfg(target_os = "macos")]`-gated), so the aarch64-apple-ios check
+# stays clean. Desktop is DMG-distributed (not Mac App Store), so the private
+# API is fine here.
+tauri = { version = "2", features = ["protocol-asset", "macos-private-api"] }
+tauri-plugin-opener = "2"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+cpal = "0.18.1"
+reqwest = { version = "0.12", default-features = false, features = ["blocking", "rustls-tls", "json"] }
+rusqlite = { version = "0.40.1", features = ["bundled"] }
+# Whisper CPU baseline for all targets (incl. iOS). macOS adds the `metal`
+# feature below (Cargo unions features across dependency tables). iOS-side
+# Metal/CoreML acceleration is a later phase; the spike ships CPU on iOS.
+whisper-rs = { version = "0.16.0", default-features = false }
+# WAV export for cloud transcription (Phase 3).
+hound = "3"
+# PCM (f32le) encoding for the base64 ASR protocols: the lalela-asr sidecar
+# (asr/sidecar_engine.rs, desktop) AND Apple Speech (asr/apple_engine.rs) — the
+# latter runs on iOS too, so base64 must be available on every target.
+base64 = "0.22"
+
+# macOS GPU acceleration: needs the full Xcode metal compiler
+# (xcode-select -s /Applications/Xcode.app/Contents/Developer).
+[target.'cfg(target_os = "macos")'.dependencies]
+whisper-rs = { version = "0.16.0", default-features = false, features = ["metal"] }
+# Keychain custody for connected-account refresh tokens (Slice 9). macOS-only
+# on purpose: iOS has no connections UI yet, and gating here keeps the
+# aarch64-apple-ios check clean. (Edited by hand — `cargo add` is unreliable
+# in synced folders.)
+keyring = { version = "3", features = ["apple-native"] }
+# System-wide dictation (Wave B2), macOS desktop only — kept off every other
+# target so `cargo check --target aarch64-apple-ios` and the Windows/Linux
+# desktop builds stay clean. (Edited by hand — `cargo add` is unreliable.)
+#   global-shortcut : the "dictate anywhere" hotkey (Rust owns registration so
+#                     it survives the main window being closed/minimised).
+#   core-graphics   : synthesise ⌘V (CGEvent) into the target app.
+#   objc2           : capture + re-activate the frontmost app (NSWorkspace /
+#                     NSRunningApplication) so the paste lands in the right place.
+#   arboard         : save/set/restore the clipboard around the paste.
+tauri-plugin-global-shortcut = "2"
+# ⌘V is synthesised as real key events posted to the HID tap after the target is
+# confirmed frontmost (post_to_pid didn't route menu key-equivalents in Notes).
+core-graphics = "0.24"
+# Build the AXIsProcessTrustedWithOptions prompt options dictionary (fires the
+# system Accessibility dialog + registers the app in the AX list).
+core-foundation = "0.10"
+# `exception` feature = objc2::exception::catch — the barrier that stops an
+# NSException from AppKit/NSPasteboard aborting the whole app (dictation must
+# never kill the host). Needs objc2-exception-helper (compiles a tiny .m shim).
+objc2 = { version = "0.6", features = ["exception"] }
+arboard = "3"
+# Shared local-model cache. The official app shares downloaded models with
+# other apps from the same publisher through a private crate; this edition
+# uses the local stub in ci/auxo-model-cache-stub, which always falls back
+# to Lalela's own app-data models folder.
+auxo-model-cache = { path = "ci/auxo-model-cache-stub" }
+
+# Desktop-only (NOT iOS, NOT Android): native file dialogs, DOCX export,
+# on-device diarization (sherpa-rs `download-binaries` fetches host libs — won't
+# cross-compile to mobile), self-update + subprocess (mobile updates via the App
+# Store / Google Play; no subprocesses). Cargo target-cfg can't use Tauri's
+# `desktop`/`mobile` build aliases, so the two mobile targets are spelled out.
+[target.'cfg(not(any(target_os = "ios", target_os = "android")))'.dependencies]
+# Menu-bar tray (Wave C1): the `tray-icon` feature is unioned onto the base
+# `tauri` dep here — desktop only, so iOS never pulls the tray-icon/muda crates
+# (which don't build for iOS). Cargo unions features across dependency tables
+# (same trick as whisper-rs `metal` above). Edited by hand — `cargo add` is
+# unreliable.
+tauri = { version = "2", features = ["tray-icon"] }
+rfd = "0.17.2"
+docx-rs = "0.4.20"
+# PDF export, the sibling of the DOCX one (both share the assembly in
+# `store::export_body`). `default-features = false` drops printpdf's HTML
+# renderer (azul-layout — a whole layout engine we don't need, since we lay
+# the page out ourselves); "jpeg" enables DCTDecode image streams, which take
+# a 70-frame video export from 54 MB to 6 MB. It re-uses the `image` crate
+# already pulled in below, so the feature costs no new dependency.
+printpdf = { version = "0.12", default-features = false, features = ["jpeg"] }
+# Transcript import (Slice 2): PDF text extraction (DOCX read reuses docx-rs).
+pdf-extract = "0.7"
+# Audio import (Slice 7): pure-Rust decode of MP3/M4A/AAC/WAV/FLAC/OGG/MKV —
+# chosen over an ffmpeg sidecar (no LGPL/GPL bundling questions, no helper
+# binary). Defaults cover the royalty-free set; extra features add the rest.
+symphonia = { version = "0.5", features = ["aac", "alac", "isomp4", "mp3"] }
+# Screenshare capture post-processing (Slice 4): pure-Rust decode/resize/hash…
+image = { version = "0.25", default-features = false, features = ["jpeg", "png"] }
+# …plus libwebp for LOSSY WebP encoding (the `image` crate only writes
+# lossless WebP — far too large for slide frames). Small vendored C lib, no
+# symbol-collision risk (nothing else links libwebp).
+webp = "0.3"
+sherpa-rs = { version = "0.6.8", default-features = false, features = ["download-binaries"] }
+tauri-plugin-updater = "2"
+tauri-plugin-process = "2"
+# OS notifications: "local model ready" download completion (T10) + finished
+# scheduled reports (phase 20 T6). Desktop-only — iOS notifications are a later
+# phase. (Edited by hand — `cargo add` is unreliable in synced folders.)
+tauri-plugin-notification = "2"
+# Integrity-check downloaded GGUFs against the catalog's git-LFS sha256 before
+# promoting the .part file (resumable download in models::download_resumable).
+sha2 = "0.10"
+hex = "0.4"
+
+# iOS-only: cpal's iOS backend never configures the shared AVAudioSession, and
+# without category `.record` + activation the microphone delivers silence.
+[target.'cfg(target_os = "ios")'.dependencies]
+objc2-avf-audio = "0.3"
+
+# Android-only: JNI bridge to the RecordingService foreground service (android.rs).
+# The JavaVM + Activity come from `tao::platform::android::main_android_context()`
+# — tao is wry's windowing layer and the runtime populates its context store (the
+# same store `run_on_android_context` reads). NOTE: `ndk_context` is NOT usable
+# here — Tauri/wry never initialise it (cpal's AAudio backend is pure-C and never
+# needs it), so `ndk_context::android_context()` panics "not initialized".
+# `tao = "0.35"` unifies with wry's own tao (single instance in Cargo.lock) so we
+# share the live context; keep this in lockstep with wry/tao on tauri upgrades.
+# `jni` 0.21 is the ndk-ecosystem standard (already in Cargo.lock). No new crate
+# VERSIONS are introduced — all three are what the Android build already pulls.
+[target.'cfg(target_os = "android")'.dependencies]
+jni = "0.21"
+tao = { version = "0.35", default-features = false }
+log = "0.4"
+
+[target.'cfg(unix)'.dependencies]
+# Send SIGTERM (not SIGKILL) to the system-audio helper so it can tear down its
+# Core Audio process-tap cleanly and never orphan a tap that wedges coreaudiod.
+libc = "0.2"
+
+
+
+# Windows-only: Credential Manager custody for connected-account refresh tokens
+# (the Windows twin of the macOS `apple-native` keyring above). Same crate, same
+# service name (`digital.auxo.lalela`), same `secrets.rs` call sites — see
+# docs/WINDOWS.md 1.1. (Edited by hand — `cargo add` is unreliable.)
+[target.'cfg(target_os = "windows")'.dependencies]
+keyring = { version = "3", features = ["windows-native"] }
+# System-audio capture (WASAPI loopback). NOT cpal: cpal always initialises its
+# WASAPI clients event-driven, and Windows never signals that event for a
+# loopback stream — the stream opens and delivers nothing (proven on the test PC
+# 2026-09-21). Loopback has to be polled; this crate exposes exactly that
+# (`StreamMode::PollingShared`). MIT/Apache-2.0, windows-rs only.
+wasapi = "0.24"
+# "Dictate anywhere" on Windows (parity with the macOS Wave B2 feature): the same
+# global-shortcut plugin registers the hotkey (RegisterHotKey under the hood) and
+# arboard sets/restores the clipboard around the synthesised Ctrl+V. The Win32
+# calls themselves (foreground window, keybd_event) are a handful of raw user32
+# FFI declarations in dictation.rs — no extra crate. Both crates were already in
+# Cargo.lock via the macOS table, so the lockfile is unchanged.
+tauri-plugin-global-shortcut = "2"
+arboard = "3"
+# One running Lalela per user session. macOS gets this from LaunchServices;
+# on Windows, launching again (Start menu, a pinned tile, the Store's "Open")
+# while Lalela sits in the tray started a SECOND process — two tray icons, two
+# writers on the same SQLite file, and a hotkey the second copy can't register.
+# The plugin forwards the relaunch to the running instance, which shows itself.
+tauri-plugin-single-instance = "2"
+
+# swift-rs 1.0.8 + one Lalela patch so release iOS builds link on Xcode 27
+# (swift-rs's own runtime exports were left internal). See vendor/README.md.
+[patch.crates-io]
+swift-rs = { path = "vendor/swift-rs" }
+tao = { path = "vendor/tao" }

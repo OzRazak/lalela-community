@@ -1,0 +1,9 @@
+{
+  "$schema": "https://schemas.tauri.app/config/2",
+  "bundle": {
+    "resources": {
+      "winlibs/*.dll": "./",
+      "winlibs/*.exe": "./"
+    }
+  }
+}

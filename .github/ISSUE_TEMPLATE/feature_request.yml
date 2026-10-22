@@ -1,0 +1,36 @@
+name: Feature proposal
+description: Propose a feature. Features need a maintainer-accepted issue before any code.
+labels: [proposal]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Please read CONTRIBUTING.md first. A maintainer will label this `accepted` (or explain why not) before anyone opens a pull request for it.
+        Lalela Community is local-only by design: proposals that add accounts, sync, telemetry or other hosted services are out of scope.
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem does this solve?
+      description: Describe the need, not only the solution.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed approach
+      description: How it would work for the user, and roughly where in the code.
+    validations:
+      required: true
+  - type: textarea
+    id: privacy
+    attributes:
+      label: Privacy impact
+      description: Does it read, store or send anything new? Everything must stay on the device unless the user starts it.
+    validations:
+      required: true
+  - type: checkboxes
+    id: dco
+    attributes:
+      label: Contributing
+      options:
+        - label: If accepted, I will implement it in one focused PR with signed-off commits (DCO).

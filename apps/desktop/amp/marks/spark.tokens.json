@@ -1,0 +1,81 @@
+{
+  "$schema": "./spark.schema.json",
+  "meta": {
+    "name": "@auxo/amp-marks/spark",
+    "note": "The Spark expression set. Abstract light, NO face — a 4-point ink/yellow sparkle that survives every register. Each of the 7 states carries all 4 dial resolutions; dial 0 (== reduced-motion) is ALWAYS a static ink-on-yellow mark. Enforced by the Amp lint (check d). Rendered by CSS keyframes in ./spark.css and the <Spark> component — no Rive, no Lottie, no WebGL. Yellow is never a text colour; the static mark is ink (#1a1a1a) on yellow (#ffd200).",
+    "provenance": "Promotes auxo-2026 components/fx/Companion.tsx (the wandering yellow spark) to the estate mascot, re-expressed as CSS/SVG per the Wave 7 plan.",
+    "glyph": "4-point sparkle, viewBox 0 0 64 64, centred at 32,32",
+    "colors": { "spark": "#ffd200", "ink": "#1a1a1a", "glow": "#ffd200" }
+  },
+  "dialSemantics": {
+    "3": "darting — full personality: the state's signature motion at full amplitude, glow on",
+    "2": "lively — the same motion at reduced amplitude, glow on",
+    "1": "calm glow — state motion suppressed to a gentle breathe + soft glow pulse (all states look near-identical: a calm living spark)",
+    "0": "static — ink-on-yellow mark, no motion, no glow (identical to the prefers-reduced-motion resolution)"
+  },
+  "states": {
+    "idle-breathe": {
+      "description": "The resting state — the spark is alive and breathing. The default in populated UI.",
+      "resolutions": {
+        "3": { "static": false, "animation": "amp-spark-breathe", "amplitude": 1, "glow": true },
+        "2": { "static": false, "animation": "amp-spark-breathe", "amplitude": 0.6, "glow": true },
+        "1": { "static": false, "animation": "amp-spark-glow", "amplitude": 0.25, "glow": true, "calmGlow": true },
+        "0": { "static": true, "mark": "ink-on-yellow" }
+      }
+    },
+    "blink": {
+      "description": "A quick squash — the wink from the marketing companion. Punctuation, not a loop's whole personality.",
+      "resolutions": {
+        "3": { "static": false, "animation": "amp-spark-blink", "amplitude": 1, "glow": true },
+        "2": { "static": false, "animation": "amp-spark-blink", "amplitude": 0.6, "glow": true },
+        "1": { "static": false, "animation": "amp-spark-glow", "amplitude": 0.25, "glow": true, "calmGlow": true },
+        "0": { "static": true, "mark": "ink-on-yellow" }
+      }
+    },
+    "dart": {
+      "description": "Wanders to a new spot and back — the companion's roaming, used to draw the eye toward a target.",
+      "resolutions": {
+        "3": { "static": false, "animation": "amp-spark-dart", "amplitude": 1, "glow": true },
+        "2": { "static": false, "animation": "amp-spark-dart", "amplitude": 0.6, "glow": true },
+        "1": { "static": false, "animation": "amp-spark-glow", "amplitude": 0.25, "glow": true, "calmGlow": true },
+        "0": { "static": true, "mark": "ink-on-yellow" }
+      }
+    },
+    "celebrate-burst": {
+      "description": "The win — a pop with radiating rays. This is the reserved full-yellow-burst; primitives gate it to accent moments.",
+      "resolutions": {
+        "3": { "static": false, "animation": "amp-spark-celebrate", "amplitude": 1, "glow": true, "rays": true },
+        "2": { "static": false, "animation": "amp-spark-celebrate", "amplitude": 0.55, "glow": true, "rays": true },
+        "1": { "static": false, "animation": "amp-spark-glow", "amplitude": 0.3, "glow": true, "calmGlow": true },
+        "0": { "static": true, "mark": "ink-on-yellow" }
+      }
+    },
+    "think": {
+      "description": "Working/pending — a gentle bob with a small orbiting satellite. The branded loader.",
+      "resolutions": {
+        "3": { "static": false, "animation": "amp-spark-think", "amplitude": 1, "glow": true, "satellite": true },
+        "2": { "static": false, "animation": "amp-spark-think", "amplitude": 0.6, "glow": true, "satellite": true },
+        "1": { "static": false, "animation": "amp-spark-glow", "amplitude": 0.25, "glow": true, "calmGlow": true },
+        "0": { "static": true, "mark": "ink-on-yellow" }
+      }
+    },
+    "shy": {
+      "description": "Recedes — shrinks and eases away, then returns. The cursor-shy behaviour, used for gentle empty states.",
+      "resolutions": {
+        "3": { "static": false, "animation": "amp-spark-shy", "amplitude": 1, "glow": true },
+        "2": { "static": false, "animation": "amp-spark-shy", "amplitude": 0.6, "glow": true },
+        "1": { "static": false, "animation": "amp-spark-glow", "amplitude": 0.25, "glow": true, "calmGlow": true },
+        "0": { "static": true, "mark": "ink-on-yellow" }
+      }
+    },
+    "point": {
+      "description": "Directional nudge — leans toward a target with a small pointer ray. Used for wayfinding/first-mile hints.",
+      "resolutions": {
+        "3": { "static": false, "animation": "amp-spark-point", "amplitude": 1, "glow": true, "pointer": true },
+        "2": { "static": false, "animation": "amp-spark-point", "amplitude": 0.6, "glow": true, "pointer": true },
+        "1": { "static": false, "animation": "amp-spark-glow", "amplitude": 0.25, "glow": true, "calmGlow": true },
+        "0": { "static": true, "mark": "ink-on-yellow" }
+      }
+    }
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "_comment": "Gold set — speaker naming (Slice 1). Embeddings are synthetic unit vectors standing in for titanet output: each enrolled person owns a direction; meeting clusters are noisy versions of a person's direction (match expected) or an orthogonal stranger (must stay generic). Replace/extend with real extracted embeddings as they accumulate.",
+  "enrolled": [
+    { "name": "Oz Razak", "embedding": [0.97, 0.2, 0.05, 0.0, 0.1, 0.0, 0.0, 0.0] },
+    { "name": "Thandi Mokoena", "embedding": [0.05, 0.1, 0.95, 0.25, 0.0, 0.1, 0.0, 0.0] },
+    { "name": "Sipho Dlamini", "embedding": [0.0, 0.05, 0.0, 0.1, 0.2, 0.95, 0.15, 0.0] }
+  ],
+  "meetings": [
+    {
+      "id": "gold-m1-team-sync",
+      "clusters": [
+        { "label": "Speaker 1", "embedding": [0.94, 0.3, 0.1, 0.05, 0.05, 0.0, 0.0, 0.05], "reference": "Oz Razak" },
+        { "label": "Speaker 2", "embedding": [0.1, 0.05, 0.9, 0.35, 0.05, 0.05, 0.0, 0.0], "reference": "Thandi Mokoena" }
+      ]
+    },
+    {
+      "id": "gold-m2-client-call",
+      "clusters": [
+        { "label": "Speaker 1", "embedding": [0.05, 0.1, 0.05, 0.05, 0.25, 0.9, 0.2, 0.05], "reference": "Sipho Dlamini" },
+        { "label": "Speaker 2", "embedding": [0.05, 0.9, 0.05, 0.0, 0.05, 0.0, 0.3, 0.25], "reference": "Speaker 2" }
+      ]
+    },
+    {
+      "id": "gold-m3-one-known-voice",
+      "clusters": [
+        { "label": "Speaker 1", "embedding": [0.9, 0.15, 0.0, 0.1, 0.15, 0.05, 0.05, 0.0], "reference": "Oz Razak" },
+        { "label": "Speaker 2", "embedding": [0.0, 0.2, 0.1, 0.9, 0.0, 0.1, 0.3, 0.0], "reference": "Speaker 2" }
+      ]
+    }
+  ]
+}

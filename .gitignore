@@ -1,0 +1,41 @@
+# Dependencies and build output
+node_modules
+dist
+dist-ssr
+target
+*.tsbuildinfo
+.turbo
+
+# Tauri: auto-generated ACL schemas (regenerated each build). The iOS/Android
+# projects under gen/apple + gen/android are tracked; their own .gitignore
+# files exclude build artifacts.
+**/src-tauri/gen/schemas
+/apps/desktop/src-tauri/winlibs/
+xcuserdata/
+build/
+Externals/
+
+# Local environment files. apps/desktop/edition/community.env is the tracked
+# build configuration; put personal overrides in .env.local (never commit keys).
+.env
+.env.*
+*.local
+
+# Bundles
+*.dmg
+*.app
+
+# Logs, caches, editors, OS
+logs
+*.log
+*.air
+*.metallib
+__pycache__/
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.sw?
+
+# Written by the private export script; not part of the published tree.
+.lalela-oss-export

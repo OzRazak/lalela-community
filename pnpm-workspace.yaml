@@ -1,0 +1,8 @@
+packages:
+  - "apps/desktop"
+
+# pnpm 11 build-script allowlist (native build scripts must be opted in).
+# core-js's postinstall is only a funding banner — safe to skip.
+allowBuilds:
+  core-js: false
+  esbuild: true
